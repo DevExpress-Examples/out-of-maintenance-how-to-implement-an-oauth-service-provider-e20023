@@ -1,0 +1,63 @@
+﻿@model FormCollection
+@{
+    ViewBag.Title = "Authorize";
+}
+
+<div style="padding:10px;">
+    <div>
+    A third-party service <strong>@Model["Application"]</strong> requests access to your account. 
+    If this is a service you trust, you can authorize it by entering your credentials below. Your account credentials <strong>will never</strong> be sent to any third-party services.
+    </div>
+    
+    <div>                        
+    @if (!ViewData.ModelState.IsValid) {
+       @Html.ValidationSummary(false)
+    } else {
+        <div style="height:20px;"></div>
+    }                       
+    </div>
+
+    @using (Html.BeginForm(Html.BeginForm())) {
+    <div>
+        <table class="input-table"> 
+            <tr>
+                <td class="label">
+                            <label for="Email">Email address: [guest@devexpress.com]</label>
+                </td>
+            </tr> 
+            <tr>
+                <td>
+                    <input style="width:150px;" type="text" id="Email" name="Email" value="@Model["Email"]"/>
+                </td>
+            </tr> 
+
+            <tr>
+                <td class="label">
+                            <label for="Password">Password: [devexpress]</label>
+                </td>
+            </tr>         
+
+            <tr>
+                <td>
+                    <input style="width:150px;" type="password" id="Password" name="Password" value=""/> 
+                </td>
+            </tr>         
+
+            <tr style="height:10px;"/>
+            
+            <tr> 
+                <td>
+                    <div >
+                            <input type="submit" value="Allow" name="Allow"/> 
+                            <input type="submit" value="Deny"  name="Allow"/> 
+                    </div>
+                </td>
+            </tr>                                 
+                              
+        </table>         
+                       
+    </div>
+    }
+   
+</div>
+

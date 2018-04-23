@@ -1,0 +1,148 @@
+﻿@model FormCollection
+         
+@{
+    ViewBag.Title = "OAuth";
+}
+
+<div style="height:5px;"></div>
+
+<b>Provider</b>
+<hr/>
+
+<table>
+  <tr>
+      <td>
+<b>Consumer key</b>
+      </td>
+  </tr>
+  <tr>
+      <td>
+      anonymous
+      </td>
+  </tr>
+  <tr>
+      <td>
+<b>Consumer secret</b>
+      </td>
+  </tr>
+  <tr>
+      <td>
+      anonymous
+      </td>
+  </tr>
+  <tr>
+      <td>
+<b>Request token URL</b>
+      </td>
+  </tr>
+  <tr>
+      <td>
+      @Url.Action("Request_token", "OAuth", null, "http").ToLower()
+      </td>
+  </tr>
+
+  <tr>
+      <td>
+<b>Authorize URL</b>
+      </td>
+  </tr>
+  <tr>
+      <td>
+      @Url.Action("Authorize", "OAuth", null, "http").ToLower()
+      </td>
+  </tr>
+
+  <tr>
+      <td>
+<b>Access token URL</b>
+      </td>
+  </tr>
+  <tr>
+      <td>
+      @Url.Action("Access_token", "OAuth", null, "http").ToLower()
+      </td>
+  </tr>
+  
+  <tr>
+      <td>
+<b>Supported signatures</b>
+      </td>
+  </tr>
+  <tr>
+      <td>
+      PLAINTEXT, HMASHA1
+      </td>
+  </tr>
+
+</table>
+
+<div style="height:20px;"></div>
+
+<b>Consumer</b>
+<hr/>
+
+@using (Html.BeginForm(Html.BeginForm())) {
+<table>
+  <tr>
+    <td>
+      <b>Step 1:</b>
+    </td>
+  </tr>
+  <tr>
+    <td>
+       <input type="submit" value="Request token" name="Step" @(!String.IsNullOrWhiteSpace(Model["Step1.Disabled"]) ? "disabled='disabled'" : "")/>
+    </td>
+  </tr>
+  <tr>
+    <td>
+        @if (!String.IsNullOrEmpty(Model["request_token"])) {
+          <span><b>request_token: </b>@Model["request_token"]</span>
+          <br />
+          <span><b>request_token_secret: </b>@Model["request_token_secret"]</span>
+        }
+    </td>
+  </tr>
+  <tr style="height:5px;"></tr>
+  <tr>
+    <td>
+      <b>Step 2:</b>
+    </td>
+  </tr>
+  <tr>
+    <td>
+       <input type="submit" value="Authorize" name="Step" @(!String.IsNullOrWhiteSpace(Model["Step2.Disabled"]) ? "disabled='disabled'" : "")/>
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+        @if (!String.IsNullOrEmpty(Model["oauth_verifier"])) {
+          <span><b>oauth_token: </b>@Model["oauth_token"]</span>
+          <br />
+          <span><b>oauth_verifier: </b>@Model["oauth_verifier"]</span>
+        }
+    </td>
+  </tr>
+
+  <tr style="height:5px;"></tr>
+  <tr>
+    <td>
+      <b>Step 3:</b>
+    </td>
+  </tr>
+  <tr>
+    <td>
+       <input type="submit" value="Access token" name="Step" @(!String.IsNullOrWhiteSpace(Model["Step3.Disabled"]) ? "disabled='disabled'" : "")/>
+    </td>
+  </tr>
+    <tr>
+    <td>
+        @if (!String.IsNullOrEmpty(Model["access_token"])) {
+          <span><b>access_token: </b>@Model["access_token"]</span>
+          <br />
+          <span><b>access_token_secret: </b>@Model["access_token_secret"]</span>
+        }
+    </td>
+  </tr>
+</table>
+}
