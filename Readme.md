@@ -12,6 +12,9 @@
 * [Web.config](./CS/WebSite/Web.config) (VB: [Web.config](./VB/WebSite/Web.config))
 <!-- default file list end -->
 # How to implement an OAuth Service Provider
+<!-- run online -->
+**[[Run Online]](https://codecentral.devexpress.com/e20023)**
+<!-- run online end -->
 
 
 <p>The following example demonstrates how to implement a simple OAuth 1.0 Service Provider.</p>
