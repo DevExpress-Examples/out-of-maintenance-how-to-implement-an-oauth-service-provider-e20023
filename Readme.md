@@ -13,7 +13,7 @@
 <!-- default file list end -->
 # How to implement an OAuth Service Provider
 <!-- run online -->
-**[[Run Online]](https://codecentral.devexpress.com/e20023)**
+**[[Run Online]](https://codecentral.devexpress.com/e20023/)**
 <!-- run online end -->
 
 
