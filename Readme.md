@@ -1,24 +1,3 @@
-<!-- default file list -->
-*Files to look at*:
+#  OBSOLETE - How to implement an OAuth Service Provider
 
-* [HomeController.cs](./CS/WebSite/Controllers/HomeController.cs) (VB: [HomeController.vb](./VB/WebSite/Controllers/HomeController.vb))
-* [OAuthController.cs](./CS/WebSite/Controllers/OAuthController.cs) (VB: [OAuthController.vb](./VB/WebSite/Controllers/OAuthController.vb))
-* [AccessTokenCache.cs](./CS/WebSite/OAuth/AccessTokenCache.cs) (VB: [AccessTokenCache.vb](./VB/WebSite/OAuth/AccessTokenCache.vb))
-* [ConsumerCache.cs](./CS/WebSite/OAuth/ConsumerCache.cs) (VB: [ConsumerCache.vb](./VB/WebSite/OAuth/ConsumerCache.vb))
-* [RequestTokenCache.cs](./CS/WebSite/OAuth/RequestTokenCache.cs) (VB: [RequestTokenCache.vb](./VB/WebSite/OAuth/RequestTokenCache.vb))
-* [TokenStoreHelper.cs](./CS/WebSite/OAuth/TokenStoreHelper.cs) (VB: [TokenStoreHelper.vb](./VB/WebSite/OAuth/TokenStoreHelper.vb))
-* [Index.cshtml](./CS/WebSite/Views/Home/Index.cshtml)
-* [Authorize.cshtml](./CS/WebSite/Views/OAuth/Authorize.cshtml)
-* [Web.config](./CS/WebSite/Web.config) (VB: [Web.config](./VB/WebSite/Web.config))
-<!-- default file list end -->
-# How to implement an OAuth Service Provider
-<!-- run online -->
-**[[Run Online]](https://codecentral.devexpress.com/e20023/)**
-<!-- run online end -->
-
-
-<p>The following example demonstrates how to implement a simple OAuth 1.0 Service Provider.</p>
-
-<br/>
-
-
+The **DevExpress.Utils.Oauth** namespace was removed in **v20.2**. To implement OAuth authorization in your MVC application, use ASP.NET Identity: [Create an ASP.NET MVC 5 App with Facebook, Twitter, LinkedIn and Google OAuth2 Sign-on (C#)](https://docs.microsoft.com/en-us/aspnet/mvc/overview/security/create-an-aspnet-mvc-5-app-with-facebook-and-google-oauth2-and-openid-sign-on).
