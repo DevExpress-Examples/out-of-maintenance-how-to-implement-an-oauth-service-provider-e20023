@@ -1,1 +1,0 @@
-﻿<%@ Application Codebehind="Global.asax.vb" Inherits="OAuth_Provider_Basics.MvcApplication" Language="vb" %>
