@@ -1,5 +1,4 @@
-﻿Imports Microsoft.VisualBasic
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Linq
 Imports System.Web
@@ -12,23 +11,25 @@ Namespace OAuth_Provider_Basics.Controllers
 		Inherits Controller
 
 		Public Function Request_Token() As ActionResult
-			Dim response As Response = ServiceProvider.GetRequestToken(Request.HttpMethod, Request.Url)
+'INSTANT VB NOTE: The variable response was renamed since Visual Basic does not handle local variables named the same as class members well:
+			Dim response_Conflict As Response = ServiceProvider.GetRequestToken(Request.HttpMethod, Request.Url)
 
-            Me.Response.StatusCode = response.StatusCode
+			Response.StatusCode = response_Conflict.StatusCode
 
-			Return Content(response.Content, response.ContentType)
+			Return Content(response_Conflict.Content, response_Conflict.ContentType)
 		End Function
 
 		Public Function Access_Token() As ActionResult
-			Dim response As Response = ServiceProvider.GetAccessToken(Request.HttpMethod, Request.Url)
+'INSTANT VB NOTE: The variable response was renamed since Visual Basic does not handle local variables named the same as class members well:
+			Dim response_Conflict As Response = ServiceProvider.GetAccessToken(Request.HttpMethod, Request.Url)
 
-            Me.Response.StatusCode = response.StatusCode
+			Response.StatusCode = response_Conflict.StatusCode
 
-			Return Content(response.Content, response.ContentType)
+			Return Content(response_Conflict.Content, response_Conflict.ContentType)
 		End Function
 
-		Private Function VerifyRequestToken(<System.Runtime.InteropServices.Out()> ByRef token As IToken) As Boolean
-			Dim scope As ValidationScope
+		Private Function VerifyRequestToken(ByRef token As IToken) As Boolean
+			Dim scope As ValidationScope = Nothing
 			token = ServiceProvider.VerifyRequestToken(Request.HttpMethod, Request.Url, scope)
 			If token Is Nothing OrElse token.IsEmpty Then
 				If scope IsNot Nothing Then
@@ -46,8 +47,8 @@ Namespace OAuth_Provider_Basics.Controllers
 		Public Function Authorize() As ActionResult
 			Dim model As New FormCollection()
 
-			Dim token As IToken
-			If (Not VerifyRequestToken(token)) Then
+			Dim token As IToken = Nothing
+			If Not VerifyRequestToken(token) Then
 				Return View(model)
 			End If
 
@@ -58,7 +59,7 @@ Namespace OAuth_Provider_Basics.Controllers
 		End Function
 
 		Private Function AuthorizeRequestToken(ByVal credentials As String) As Boolean
-			Dim scope As ValidationScope
+			Dim scope As ValidationScope = Nothing
 			Dim token As IToken = ServiceProvider.AuthorizeRequestToken(Request.HttpMethod, Request.Url, credentials, scope)
 			If token Is Nothing OrElse token.IsEmpty Then
 				If scope IsNot Nothing Then
@@ -73,11 +74,11 @@ Namespace OAuth_Provider_Basics.Controllers
 			Return True
 		End Function
 
-		<HttpPost> _
+		<HttpPost>
 		Public Function Authorize(ByVal model As FormCollection) As ActionResult
 			Try
-				Dim token As IToken
-				If (Not VerifyRequestToken(token)) Then
+				Dim token As IToken = Nothing
+				If Not VerifyRequestToken(token) Then
 					Return View(model)
 				End If
 
@@ -88,7 +89,7 @@ Namespace OAuth_Provider_Basics.Controllers
 				If String.Equals("guest@devexpress.com", model("Email"), StringComparison.InvariantCultureIgnoreCase) AndAlso String.Equals("devexpress", model("Password"), StringComparison.InvariantCultureIgnoreCase) Then
 
 							If AuthorizeRequestToken("guest@devexpress.com") Then
-								Dim returnUri As Uri = (CType(token.Callback, Url)).ToUri(Parameter.Token(token.Value), Parameter.Verifier(token.Verifier))
+								Dim returnUri As Uri = CType(token.Callback, Url).ToUri(Parameter.Token(token.Value), Parameter.Verifier(token.Verifier))
 								Return Redirect(returnUri.ToString())
 							End If
 

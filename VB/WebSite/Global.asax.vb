@@ -1,5 +1,4 @@
-﻿Imports Microsoft.VisualBasic
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Linq
 Imports System.Web
@@ -12,6 +11,7 @@ Namespace OAuth_Provider_Basics
 
 	Public Class MvcApplication
 		Inherits System.Web.HttpApplication
+
 		Public Shared Sub RegisterGlobalFilters(ByVal filters As GlobalFilterCollection)
 			filters.Add(New HandleErrorAttribute())
 		End Sub
@@ -19,7 +19,11 @@ Namespace OAuth_Provider_Basics
 		Public Shared Sub RegisterRoutes(ByVal routes As RouteCollection)
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}")
 
-			routes.MapRoute("Default", "{controller}/{action}/{id}", New With {Key .controller = "Home", Key .action = "Index", Key .id = UrlParameter.Optional})
+			routes.MapRoute("Default", "{controller}/{action}/{id}", New With {
+				Key .controller = "Home",
+				Key .action = "Index",
+				Key .id = UrlParameter.Optional
+			})
 
 		End Sub
 

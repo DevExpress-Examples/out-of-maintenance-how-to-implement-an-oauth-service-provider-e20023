@@ -1,5 +1,4 @@
-﻿Imports Microsoft.VisualBasic
-Imports System
+﻿Imports System
 Imports System.Collections.Generic
 Imports System.Linq
 Imports System.Web
@@ -10,6 +9,7 @@ Imports DevExpress.Utils.OAuth
 Namespace OAuth_Provider_Basics.Controllers
 	Public Class HomeController
 		Inherits Controller
+
 		Private Function CreateConsumer() As Consumer
 			Dim consumer As New Consumer()
 
@@ -35,7 +35,7 @@ Namespace OAuth_Provider_Basics.Controllers
 			Dim [step] As String = Request.Form("Step")
 			If String.IsNullOrEmpty([step]) Then
 				Dim oauth_verifier As String = Request.QueryString.Get("oauth_verifier")
-				If (Not String.IsNullOrEmpty(oauth_verifier)) Then
+				If Not String.IsNullOrEmpty(oauth_verifier) Then
 				   [step] = "Callback"
 				End If
 			End If
@@ -55,7 +55,7 @@ Namespace OAuth_Provider_Basics.Controllers
 
 
 				Case "Authorize"
-					request_token = CType(Session("request_token"), IToken)
+					request_token = DirectCast(Session("request_token"), IToken)
 					Dim authorize_consumer As Consumer = CreateConsumer()
 
 					authorize_consumer.RequestToken = New Token(request_token.ConsumerKey, request_token.ConsumerSecret, request_token.Value, request_token.Secret)
@@ -63,7 +63,7 @@ Namespace OAuth_Provider_Basics.Controllers
 					Return Redirect(authorize_consumer.GetAuthorizeTokenUrl().ToString())
 
 				Case "Callback"
-					request_token = CType(Session("request_token"), IToken)
+					request_token = DirectCast(Session("request_token"), IToken)
 
 					Session("oauth_token") = Request.QueryString("oauth_token")
 					Session("oauth_verifier") = Request.QueryString("oauth_verifier")
@@ -78,17 +78,17 @@ Namespace OAuth_Provider_Basics.Controllers
 
 
 				Case "Access token"
-					request_token = CType(Session("request_token"), IToken)
+					request_token = DirectCast(Session("request_token"), IToken)
 					Dim access_consumer As Consumer = CreateConsumer()
 
 					access_consumer.RequestToken = New Token(request_token.ConsumerKey, request_token.ConsumerSecret, request_token.Value, request_token.Secret)
 
-					Dim access_token As IToken = access_consumer.GetAccessToken(request_token, CType(Session("oauth_verifier"), String))
+					Dim access_token As IToken = access_consumer.GetAccessToken(request_token, DirectCast(Session("oauth_verifier"), String))
 
 					model("request_token") = request_token.Value
 					model("request_token_secret") = request_token.Secret
-					model("oauth_token") = CType(Session("oauth_token"), String)
-					model("oauth_verifier") = CType(Session("oauth_verifier"), String)
+					model("oauth_token") = DirectCast(Session("oauth_token"), String)
+					model("oauth_verifier") = DirectCast(Session("oauth_verifier"), String)
 					model("access_token") = access_token.Value
 					model("access_token_secret") = access_token.Secret
 

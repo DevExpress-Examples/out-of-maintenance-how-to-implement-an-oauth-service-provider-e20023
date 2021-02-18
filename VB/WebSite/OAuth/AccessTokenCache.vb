@@ -1,15 +1,16 @@
-Imports Microsoft.VisualBasic
-	Imports System
-	Imports DevExpress.Xpo
-	Imports System.Collections.Generic
-	Imports DevExpress.Data.Filtering
-	Imports DevExpress.Utils.OAuth.Provider
-	Imports DevExpress.Utils.OAuth
-	Imports System.Web
+﻿Imports System.Web
+Imports DevExpress.Utils.OAuth
+Imports DevExpress.Utils.OAuth.Provider
+Imports DevExpress.Data.Filtering
+Imports System.Collections.Generic
+Imports DevExpress.Xpo
+Imports System
+
 Namespace OAuth_Provider_Basics.OAuth
 
 	Public Class AccessTokenCache
 		Inherits AccessTokenStore
+
 		Public Overrides Function GetToken(ByVal token As String) As IToken
 			If String.IsNullOrEmpty(token) Then
 				Return Nothing

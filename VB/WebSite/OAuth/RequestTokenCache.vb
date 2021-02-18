@@ -1,11 +1,12 @@
-Imports Microsoft.VisualBasic
-	Imports System
-	Imports DevExpress.Utils.OAuth.Provider
-	Imports DevExpress.Utils.OAuth
+﻿Imports DevExpress.Utils.OAuth
+Imports DevExpress.Utils.OAuth.Provider
+Imports System
+
 Namespace OAuth_Provider_Basics.OAuth
 
 	Public Class RequestTokenCache
 		Inherits RequestTokenStore
+
 		Public Overrides Function GetToken(ByVal token As String) As IToken
 			If String.IsNullOrWhiteSpace(token) Then
 				Return Nothing
@@ -41,8 +42,8 @@ Namespace OAuth_Provider_Basics.OAuth
 				Return Nothing
 			End If
 'INSTANT VB NOTE: The local variable authorizeToken was renamed since Visual Basic will not allow local variables with the same name as their enclosing function or property:
-			Dim authorizeToken_Renamed As IToken = New Token(unauthorizeToken.ConsumerKey, unauthorizeToken.ConsumerSecret, unauthorizeToken.Value, unauthorizeToken.Secret, authenticationTicket, unauthorizeToken.Verifier, unauthorizeToken.Callback)
-			Return Me.Set("rt:" & authorizeToken_Renamed.Value, authorizeToken_Renamed)
+			Dim authorizeToken_Conflict As IToken = New Token(unauthorizeToken.ConsumerKey, unauthorizeToken.ConsumerSecret, unauthorizeToken.Value, unauthorizeToken.Secret, authenticationTicket, unauthorizeToken.Verifier, unauthorizeToken.Callback)
+			Return Me.Set("rt:" & authorizeToken_Conflict.Value, authorizeToken_Conflict)
 		End Function
 
 	End Class
